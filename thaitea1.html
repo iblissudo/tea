@@ -72,13 +72,6 @@
         text-align: center;
       }
 
-      .social-links {
-        display: flex;
-        gap: 50px;
-        align-items: center;
-      }
-
-      /* Pesanan */
       .order-list {
         margin-top: 20px;
       }
@@ -137,6 +130,12 @@
         <label for="name">Nama:</label>
         <input type="text" id="name" required />
         <br /><br />
+        <label for="whatsapp">No WhatsApp:</label>
+        <input type="text" id="whatsapp" required />
+        <br /><br />
+        <label for="address">Alamat:</label>
+        <input type="text" id="address" required />
+        <br /><br />
         <label for="quantity">Jumlah:</label>
         <input type="number" id="quantity" min="1" value="1" required />
         <br /><br />
@@ -170,13 +169,18 @@
             orderItem.classList.add("order-confirmed");
           }
           orderItem.innerHTML = `
-      <strong>${order.name}</strong> memesan ${order.quantity} ${order.menu} 
-      ${
-        !order.confirmed
-          ? `<button onclick="confirmOrder(${index})">✔</button>`
-          : ""
-      }
-    `;
+            <strong>${order.name}</strong> memesan ${order.quantity} ${
+            order.menu
+          } <br>
+            No WhatsApp: ${order.whatsapp} <br>
+            Alamat: ${order.address} <br>
+            ${
+              !order.confirmed
+                ? `<button onclick="confirmOrder(${index})">✔</button>`
+                : ""
+            }
+            <button onclick="deleteOrder(${index})">Hapus</button>
+          `;
           orderList.appendChild(orderItem);
         });
       }
@@ -188,51 +192,46 @@
         loadOrders();
       }
 
+      function deleteOrder(index) {
+        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+        savedOrders.splice(index, 1);
+        localStorage.setItem("orders", JSON.stringify(savedOrders));
+        loadOrders();
+      }
+
       document
         .getElementById("confirmOrder")
         .addEventListener("click", function () {
           let name = document.getElementById("name").value.trim();
+          let whatsapp = document.getElementById("whatsapp").value.trim();
+          let address = document.getElementById("address").value.trim();
           let quantity = document.getElementById("quantity").value;
           let selectedMenu = document.getElementById("menu").value;
 
-          if (name === "" || quantity <= 0) {
-            alert("Masukkan nama dan jumlah yang valid!");
+          if (
+            name === "" ||
+            whatsapp === "" ||
+            address === "" ||
+            quantity <= 0
+          ) {
+            alert("Masukkan data yang valid!");
             return;
           }
 
           let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
           savedOrders.push({
             name: name,
+            whatsapp: whatsapp,
+            address: address,
             quantity: quantity,
             menu: selectedMenu,
-            confirmed: false, // Pesanan baru belum dikonfirmasi
+            confirmed: false,
           });
           localStorage.setItem("orders", JSON.stringify(savedOrders));
 
           loadOrders();
           document.getElementById("orderForm").style.display = "none";
         });
-
-      function loadOrders() {
-        let orderList = document.getElementById("orderList");
-        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-
-        orderList.innerHTML = "";
-        savedOrders.forEach((order, index) => {
-          let orderItem = document.createElement("div");
-          orderItem.classList.add("order-item");
-          orderItem.innerHTML = `<strong>${order.name}</strong> memesan ${order.quantity} ${order.menu}
-      <button onclick="deleteOrder(${index})">Hapus</button>`;
-
-          orderList.appendChild(orderItem);
-        });
-      }
-      function deleteOrder(index) {
-        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-        savedOrders.splice(index, 1); // Hapus pesanan berdasarkan urutan
-        localStorage.setItem("orders", JSON.stringify(savedOrders)); // Simpan perubahan
-        loadOrders(); // Perbarui tampilan daftar pesanan
-      }
 
       window.onload = loadOrders;
     </script>
