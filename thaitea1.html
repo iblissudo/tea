@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -27,7 +27,6 @@
         top: 0;
         left: 0;
       }
-
       .footer {
         bottom: 0;
         left: 0;
@@ -46,13 +45,14 @@
       .menu-item {
         cursor: pointer;
         transition: transform 0.3s ease;
+        display: block;
+        margin: 10px auto;
       }
 
       .menu-item:hover {
         transform: scale(1.1);
       }
 
-      /* Modal */
       .modal {
         display: none;
         position: fixed;
@@ -96,15 +96,21 @@
       <a href="index.html" class="menu-link">Home</a>
     </div>
 
-    <br />
-    <br />
     <div class="content">
       <img
         src="thaitea.png"
         width="200"
         height="200"
         class="menu-item"
-        id="openMenu"
+        id="openThaiTea"
+      />
+      <br><br>
+      <img
+        src="greentea.png"
+        width="200"
+        height="200"
+        class="menu-item"
+        id="openGreenTea"
       />
     </div>
 
@@ -120,7 +126,7 @@
     <!-- Modal -->
     <div id="orderForm" class="modal">
       <div class="modal-content">
-        <h2>Pesan Thai Tea</h2>
+        <h2 id="orderTitle">Pesan</h2>
         <label for="menu">Pilih Menu:</label>
         <select id="menu">
           <option value="Thai Tea Biasa">Thai Tea Biasa</option>
@@ -145,9 +151,29 @@
     </div>
 
     <script>
+      let selectedMenuType = "Thai Tea";
+
       document
-        .getElementById("openMenu")
+        .getElementById("openThaiTea")
         .addEventListener("click", function () {
+          selectedMenuType = "Thai Tea";
+          document.getElementById("orderTitle").innerText = "Pesan Thai Tea";
+          document.getElementById("menu").innerHTML = `
+        <option value="Thai Tea Biasa">Thai Tea Biasa</option>
+        <option value="Thai Tea Milo">Thai Tea Milo</option>
+      `;
+          document.getElementById("orderForm").style.display = "flex";
+        });
+
+      document
+        .getElementById("openGreenTea")
+        .addEventListener("click", function () {
+          selectedMenuType = "Green Tea";
+          document.getElementById("orderTitle").innerText = "Pesan Green Tea";
+          document.getElementById("menu").innerHTML = `
+        <option value="Green Tea Biasa">Green Tea Biasa</option>
+        <option value="Green Tea Milo">Green Tea Milo</option>
+      `;
           document.getElementById("orderForm").style.display = "flex";
         });
 
@@ -160,7 +186,6 @@
       function loadOrders() {
         let orderList = document.getElementById("orderList");
         let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-
         orderList.innerHTML = "";
         savedOrders.forEach((order, index) => {
           let orderItem = document.createElement("div");
@@ -169,18 +194,18 @@
             orderItem.classList.add("order-confirmed");
           }
           orderItem.innerHTML = `
-            <strong>${order.name}</strong> memesan ${order.quantity} ${
+          <strong>${order.name}</strong> memesan ${order.quantity} ${
             order.menu
           } <br>
-            No WhatsApp: ${order.whatsapp} <br>
-            Alamat: ${order.address} <br>
-            ${
-              !order.confirmed
-                ? `<button onclick="confirmOrder(${index})">✔</button>`
-                : ""
-            }
-            <button onclick="deleteOrder(${index})">Hapus</button>
-          `;
+          No WhatsApp: ${order.whatsapp} <br>
+          Alamat: ${order.address} <br>
+          ${
+            !order.confirmed
+              ? `<button onclick="confirmOrder(${index})">✔</button>`
+              : ""
+          }
+          <button onclick="deleteOrder(${index})">Hapus</button>
+        `;
           orderList.appendChild(orderItem);
         });
       }
@@ -220,10 +245,10 @@
 
           let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
           savedOrders.push({
-            name: name,
-            whatsapp: whatsapp,
-            address: address,
-            quantity: quantity,
+            name,
+            whatsapp,
+            address,
+            quantity,
             menu: selectedMenu,
             confirmed: false,
           });
@@ -233,7 +258,7 @@
           document.getElementById("orderForm").style.display = "none";
         });
 
-      window.onload = loadOrders;
+      loadOrders();
     </script>
   </body>
 </html>
