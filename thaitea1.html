@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Raosan Thai Tea</title>
     <style>
+      body {
+        margin: 0;
+        padding-top: 60px;
+        padding-bottom: 70px;
+        text-align: center;
+      }
+
       .header,
       .footer {
         background-color: #e07a5f;
@@ -15,28 +22,15 @@
         justify-content: center;
         align-items: center;
       }
+
       .header {
         top: 0;
         left: 0;
       }
+
       .footer {
         bottom: 0;
         left: 0;
-      }
-      body {
-        margin: 0;
-        padding-top: 60px;
-        padding-bottom: 70px; /* Supaya konten tidak tertutup footer */
-        text-align: center;
-      }
-      .marquee-container {
-        display: flex;
-        justify-content: center;
-      }
-      .social-links {
-        display: flex;
-        gap: 50px; /* Jarak antar ikon */
-        align-items: center;
       }
 
       .menu-link {
@@ -44,17 +38,80 @@
         font-size: 20px;
         font-weight: bold;
         color: white;
-
         padding: 10px 20px;
         border-radius: 10px;
         transition: 0.3s;
+      }
+
+      .menu-item {
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .menu-item:hover {
+        transform: scale(1.1);
+      }
+
+      /* Modal */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 50px;
+        align-items: center;
+      }
+
+      /* Pesanan */
+      .order-list {
+        margin-top: 20px;
+      }
+
+      .order-item {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 5px;
+        margin: 5px auto;
+        width: 80%;
+        max-width: 300px;
       }
     </style>
   </head>
   <body>
     <div class="header">
-      <a href="index.html" class="menu-link"> Home</a>
+      <a href="index.html" class="menu-link">Home</a>
     </div>
+
+    <br />
+    <br />
+    <div class="content">
+      <img
+        src="thaitea.png"
+        width="200"
+        height="200"
+        class="menu-item"
+        id="openMenu"
+      />
+    </div>
+
+    <!-- Daftar Pesanan -->
+    <div class="order-list" id="orderList"></div>
 
     <div class="footer">
       <div class="social-links">
@@ -75,5 +132,84 @@
         </a>
       </div>
     </div>
+
+    <!-- Modal -->
+    <div id="orderForm" class="modal">
+      <div class="modal-content">
+        <h2>Pesan Thai Tea</h2>
+        <label for="menu">Pilih Menu:</label>
+        <select id="menu">
+          <option value="Thai Tea Biasa">Thai Tea Biasa</option>
+          <option value="Thai Tea Milo">Thai Tea Milo</option>
+        </select>
+        <br /><br />
+        <label for="name">Nama:</label>
+        <input type="text" id="name" required />
+        <br /><br />
+        <label for="quantity">Jumlah:</label>
+        <input type="number" id="quantity" min="1" value="1" required />
+        <br /><br />
+        <button id="confirmOrder">Pesan</button>
+        <button id="closeModal">Batal</button>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("openMenu")
+        .addEventListener("click", function () {
+          document.getElementById("orderForm").style.display = "flex";
+        });
+
+      document
+        .getElementById("closeModal")
+        .addEventListener("click", function () {
+          document.getElementById("orderForm").style.display = "none";
+        });
+
+      function loadOrders() {
+        let orderList = document.getElementById("orderList");
+        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+
+        orderList.innerHTML = "";
+        savedOrders.forEach((order) => {
+          let orderItem = document.createElement("div");
+          orderItem.classList.add("order-item");
+          orderItem.innerHTML = `<strong>${order.name}</strong> memesan ${order.quantity} ${order.menu}`;
+          orderList.appendChild(orderItem);
+        });
+      }
+
+      document
+        .getElementById("confirmOrder")
+        .addEventListener("click", function () {
+          let name = document.getElementById("name").value.trim();
+          let quantity = document.getElementById("quantity").value;
+          let selectedMenu = document.getElementById("menu").value;
+
+          if (name === "" || quantity <= 0) {
+            alert("Masukkan nama dan jumlah yang valid!");
+            return;
+          }
+
+          let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+
+          savedOrders.push({
+            name: name,
+            quantity: quantity,
+            menu: selectedMenu,
+          });
+
+          localStorage.setItem("orders", JSON.stringify(savedOrders));
+
+          loadOrders();
+
+          document.getElementById("orderForm").style.display = "none";
+          document.getElementById("name").value = "";
+          document.getElementById("quantity").value = 1;
+        });
+
+      window.onload = loadOrders;
+    </script>
   </body>
 </html>
