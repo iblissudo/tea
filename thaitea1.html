@@ -91,6 +91,11 @@
         width: 80%;
         max-width: 300px;
       }
+
+      .order-confirmed {
+        background: #d4edda;
+        border-left: 5px solid #28a745;
+      }
     </style>
   </head>
   <body>
@@ -172,12 +177,29 @@
         let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
 
         orderList.innerHTML = "";
-        savedOrders.forEach((order) => {
+        savedOrders.forEach((order, index) => {
           let orderItem = document.createElement("div");
           orderItem.classList.add("order-item");
-          orderItem.innerHTML = `<strong>${order.name}</strong> memesan ${order.quantity} ${order.menu}`;
+          if (order.confirmed) {
+            orderItem.classList.add("order-confirmed");
+          }
+          orderItem.innerHTML = `
+      <strong>${order.name}</strong> memesan ${order.quantity} ${order.menu} 
+      ${
+        !order.confirmed
+          ? `<button onclick="confirmOrder(${index})">✔</button>`
+          : ""
+      }
+    `;
           orderList.appendChild(orderItem);
         });
+      }
+
+      function confirmOrder(index) {
+        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+        savedOrders[index].confirmed = true;
+        localStorage.setItem("orders", JSON.stringify(savedOrders));
+        loadOrders();
       }
 
       document
@@ -193,21 +215,19 @@
           }
 
           let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-
           savedOrders.push({
             name: name,
             quantity: quantity,
             menu: selectedMenu,
+            confirmed: false, // Pesanan baru belum dikonfirmasi
           });
-
           localStorage.setItem("orders", JSON.stringify(savedOrders));
 
           loadOrders();
-
           document.getElementById("orderForm").style.display = "none";
-          document.getElementById("name").value = "";
-          document.getElementById("quantity").value = 1;
         });
+
+        
 
       window.onload = loadOrders;
     </script>
