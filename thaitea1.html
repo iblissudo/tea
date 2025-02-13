@@ -227,7 +227,47 @@
           document.getElementById("orderForm").style.display = "none";
         });
 
-        
+      function loadOrders() {
+        let orderList = document.getElementById("orderList");
+        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+
+        orderList.innerHTML = "";
+        savedOrders.forEach((order, index) => {
+          let orderItem = document.createElement("div");
+          orderItem.classList.add("order-item");
+          orderItem.innerHTML = `<strong>${order.name}</strong> memesan ${order.quantity} ${order.menu}
+      <button onclick="deleteOrder(${index})">Hapus</button>`;
+
+          orderList.appendChild(orderItem);
+        });
+      }
+      function deleteOrder(index) {
+        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+        savedOrders.splice(index, 1); // Hapus pesanan berdasarkan urutan
+        localStorage.setItem("orders", JSON.stringify(savedOrders)); // Simpan perubahan
+        loadOrders(); // Perbarui tampilan daftar pesanan
+      }
+
+      function loadOrders() {
+        let orderList = document.getElementById("orderList");
+        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+
+        orderList.innerHTML = "";
+        savedOrders.forEach((order, index) => {
+          let orderItem = document.createElement("div");
+          orderItem.classList.add("order-item");
+          orderItem.innerHTML = `<strong>${order.name}</strong> memesan ${order.quantity} ${order.menu}
+      <button onclick="deleteOrder(${index})">Hapus</button>`;
+
+          orderList.appendChild(orderItem);
+        });
+      }
+      function deleteOrder(index) {
+        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
+        savedOrders.splice(index, 1); // Hapus pesanan berdasarkan urutan
+        localStorage.setItem("orders", JSON.stringify(savedOrders)); // Simpan perubahan
+        loadOrders(); // Perbarui tampilan daftar pesanan
+      }
 
       window.onload = loadOrders;
     </script>
