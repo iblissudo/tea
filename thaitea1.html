@@ -179,7 +179,7 @@
           openOrderForm(
             "Thai Tea",
             `<option value="Thai Tea Biasa">Thai Tea Biasa</option>
-             <option value="Thai Tea Milo">Thai Tea Milo</option>`
+         <option value="Thai Tea Milo">Thai Tea Milo</option>`
           );
         });
 
@@ -189,7 +189,7 @@
           openOrderForm(
             "Green Tea",
             `<option value="Green Tea Biasa">Green Tea Biasa</option>
-             <option value="Green Tea Milo">Green Tea Milo</option>`
+         <option value="Green Tea Milo">Green Tea Milo</option>`
           );
         });
 
@@ -217,6 +217,34 @@
           document.getElementById("orderForm").style.display = "none";
         });
 
+      function saveOrder() {
+        let menu = document.getElementById("menu").value;
+        let name = document.getElementById("name").value.trim();
+        let whatsapp = document.getElementById("whatsapp").value.trim();
+        let address = document.getElementById("address").value.trim();
+        let quantity = document.getElementById("quantity").value;
+
+        if (!name || !whatsapp || !address || quantity < 1) {
+          alert("Semua data harus diisi dengan benar!");
+          return;
+        }
+
+        let order = {
+          menu,
+          name,
+          whatsapp,
+          address,
+          quantity,
+          confirmed: false,
+        };
+        let orders = JSON.parse(localStorage.getItem("orders")) || [];
+        orders.push(order);
+        localStorage.setItem("orders", JSON.stringify(orders));
+
+        document.getElementById("orderForm").style.display = "none";
+        loadOrders();
+      }
+
       function loadOrders() {
         let orderList = document.getElementById("orderList");
         let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
@@ -228,18 +256,18 @@
             orderItem.classList.add("order-confirmed");
           }
           orderItem.innerHTML = `
-            <strong>${order.name}</strong> memesan ${order.quantity} ${
+        <strong>${order.name}</strong> memesan ${order.quantity} ${
             order.menu
           } <br>
-            No WhatsApp: ${order.whatsapp} <br>
-            Alamat: ${order.address} <br>
-            ${
-              !order.confirmed
-                ? `<button onclick="confirmOrder(${index})">✔</button>`
-                : ""
-            }
-            <button onclick="deleteOrder(${index})">Hapus</button>
-          `;
+        No WhatsApp: ${order.whatsapp} <br>
+        Alamat: ${order.address} <br>
+        ${
+          !order.confirmed
+            ? `<button onclick="confirmOrder(${index})">✔</button>`
+            : ""
+        }
+        <button onclick="deleteOrder(${index})">Hapus</button>
+      `;
           orderList.appendChild(orderItem);
         });
       }
@@ -260,9 +288,7 @@
 
       document
         .getElementById("confirmOrder")
-        .addEventListener("click", function () {
-          // Proses pemesanan sama seperti sebelumnya
-        });
+        .addEventListener("click", saveOrder);
 
       loadOrders();
     </script>
