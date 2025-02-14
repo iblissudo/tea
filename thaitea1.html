@@ -32,16 +32,6 @@
         left: 0;
       }
 
-      .menu-link {
-        text-decoration: none;
-        font-size: 20px;
-        font-weight: bold;
-        color: white;
-        padding: 10px 20px;
-        border-radius: 10px;
-        transition: 0.3s;
-      }
-
       .menu-item {
         cursor: pointer;
         transition: transform 0.3s ease;
@@ -71,23 +61,11 @@
         border-radius: 10px;
         text-align: center;
       }
-
-      .order-list {
-        margin-top: 20px;
-      }
-
-      .order-item {
-        background: #f4f4f4;
-        padding: 10px;
-        border-radius: 5px;
-        margin: 5px auto;
-        width: 80%;
-        max-width: 300px;
-      }
-
-      .order-confirmed {
-        background: #d4edda;
-        border-left: 5px solid #28a745;
+      .menu-link {
+        text-decoration: none;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
       }
     </style>
   </head>
@@ -130,9 +108,6 @@
       />
     </div>
 
-    <!-- Daftar Pesanan -->
-    <div class="order-list" id="orderList"></div>
-
     <div class="footer">
       <a href="https://wa.me/6285772771373" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -164,10 +139,7 @@
     </div>
 
     <script>
-      let selectedMenuType = "";
-
       function openOrderForm(title, options) {
-        selectedMenuType = title;
         document.getElementById("orderTitle").innerText = `Pesan ${title}`;
         document.getElementById("menu").innerHTML = options;
         document.getElementById("orderForm").style.display = "flex";
@@ -178,8 +150,7 @@
         .addEventListener("click", function () {
           openOrderForm(
             "Thai Tea",
-            `<option value="Thai Tea Biasa">Thai Tea Biasa</option>
-         <option value="Thai Tea Milo">Thai Tea Milo</option>`
+            `<option value="Thai Tea Biasa">Thai Tea Biasa</option><option value="Thai Tea Milo">Thai Tea Milo</option>`
           );
         });
 
@@ -188,8 +159,7 @@
         .addEventListener("click", function () {
           openOrderForm(
             "Green Tea",
-            `<option value="Green Tea Biasa">Green Tea Biasa</option>
-         <option value="Green Tea Milo">Green Tea Milo</option>`
+            `<option value="Green Tea Biasa">Green Tea Biasa</option><option value="Green Tea Milo">Green Tea Milo</option>`
           );
         });
 
@@ -217,6 +187,10 @@
           document.getElementById("orderForm").style.display = "none";
         });
 
+      document
+        .getElementById("confirmOrder")
+        .addEventListener("click", saveOrder);
+
       function saveOrder() {
         let menu = document.getElementById("menu").value;
         let name = document.getElementById("name").value.trim();
@@ -229,68 +203,14 @@
           return;
         }
 
-        let order = {
-          menu,
-          name,
-          whatsapp,
-          address,
-          quantity,
-          confirmed: false,
-        };
-        let orders = JSON.parse(localStorage.getItem("orders")) || [];
-        orders.push(order);
-        localStorage.setItem("orders", JSON.stringify(orders));
+        let orderText = `Halo, saya ingin memesan:\n- Menu: ${menu}\n- Nama: ${name}\n- No WhatsApp: ${whatsapp}\n- Alamat: ${address}\n- Jumlah: ${quantity}`;
+        let waLink = `https://wa.me/6285772771373?text=${encodeURIComponent(
+          orderText
+        )}`;
+        window.open(waLink, "_blank");
 
         document.getElementById("orderForm").style.display = "none";
-        loadOrders();
       }
-
-      function loadOrders() {
-        let orderList = document.getElementById("orderList");
-        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-        orderList.innerHTML = "";
-        savedOrders.forEach((order, index) => {
-          let orderItem = document.createElement("div");
-          orderItem.classList.add("order-item");
-          if (order.confirmed) {
-            orderItem.classList.add("order-confirmed");
-          }
-          orderItem.innerHTML = `
-        <strong>${order.name}</strong> memesan ${order.quantity} ${
-            order.menu
-          } <br>
-        No WhatsApp: ${order.whatsapp} <br>
-        Alamat: ${order.address} <br>
-        ${
-          !order.confirmed
-            ? `<button onclick="confirmOrder(${index})">✔</button>`
-            : ""
-        }
-        <button onclick="deleteOrder(${index})">Hapus</button>
-      `;
-          orderList.appendChild(orderItem);
-        });
-      }
-
-      function confirmOrder(index) {
-        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-        savedOrders[index].confirmed = true;
-        localStorage.setItem("orders", JSON.stringify(savedOrders));
-        loadOrders();
-      }
-
-      function deleteOrder(index) {
-        let savedOrders = JSON.parse(localStorage.getItem("orders")) || [];
-        savedOrders.splice(index, 1);
-        localStorage.setItem("orders", JSON.stringify(savedOrders));
-        loadOrders();
-      }
-
-      document
-        .getElementById("confirmOrder")
-        .addEventListener("click", saveOrder);
-
-      loadOrders();
     </script>
   </body>
 </html>
