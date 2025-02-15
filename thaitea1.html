@@ -107,6 +107,31 @@
         id="openBlackcurrantTea"
       />
     </div>
+    <img
+      src="lemontea.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openLemonTea"
+    />
+    <br />
+    <br />
+    <img
+      src="lemonteagreentea.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openLemonGreenTea"
+    />
+    <br />
+    <br />
+    <img
+      src="lemonmadu.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openLemonMadu"
+    />
 
     <div class="footer">
       <a href="https://wa.me/6285772771373" target="_blank">
@@ -211,6 +236,36 @@
 
         document.getElementById("orderForm").style.display = "none";
       }
+
+      document
+        .getElementById("openLemonTea")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "Lemon Tea",
+            `<option value="Lemon Tea Biasa">Lemon Tea Biasa</option>
+       <option value="Lemon Tea Campur Yakult">Lemon Tea Campur Yakult</option>`
+          );
+        });
+
+      document
+        .getElementById("openLemonGreenTea")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "Lemon Green Tea",
+            `<option value="Lemon Green Tea Biasa">Lemon Green Tea Biasa</option>
+       <option value="Lemon Green Tea Campur Yakult">Lemon Green Tea Campur Yakult</option>`
+          );
+        });
+
+      document
+        .getElementById("openLemonMadu")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "Lemon Madu",
+            `<option value="Lemon Madu">Lemon Madu</option>
+       <option value="Lemon Madu Campur Yakult">Lemon Madu Campur Yakult</option>`
+          );
+        });
     </script>
   </body>
 </html>
