@@ -188,6 +188,15 @@
       class="menu-item"
       id="openLycheeSquash"
     />
+    <br />
+    <br />
+    <img
+      src="lumutcappucino.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openLumutCappucino"
+    />
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -373,6 +382,15 @@
           openOrderForm(
             "Lychee Squash",
             `<option value="Lychee Squash">Lychee Squash</option>`
+          );
+        });
+
+      document
+        .getElementById("openLumutCappucino")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "Lychee Squash",
+            `<option value="LumutCappucino">LumutCappucino</option>`
           );
         });
     </script>
