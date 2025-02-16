@@ -247,6 +247,16 @@
       class="menu-item"
       id="openTaro"
     />
+
+    <br />
+    <br />
+    <img
+      src="bublegum.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openBublegum"
+    />
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -478,6 +488,15 @@
         .getElementById("openTaro")
         .addEventListener("click", function () {
           openOrderForm("Taro", `<option value="Taro">Taro</option>`);
+        });
+
+      document
+        .getElementById("openBublegum")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "Bublegum",
+            `<option value="Bublegum">Bublegum</option>`
+          );
         });
     </script>
   </body>
