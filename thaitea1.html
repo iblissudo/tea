@@ -361,6 +361,16 @@
       id="openStrawberryYakult"
     />
 
+    <br />
+    <br />
+    <img
+      src="strawberryfreshmilkyakult.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openStrawberryFreshMilkYakult"
+    />
+
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -684,6 +694,15 @@
           openOrderForm(
             "StrawberryYakult",
             `<option value="StrawberryYakult">StrawberryYakult</option>`
+          );
+        });
+
+        document
+        .getElementById("openStrawberryFreshMilkYakult")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "StrawberryFreshMilkYakult",
+            `<option value="StrawberryFreshMilkYakult">StrawberryFreshMilkYakult</option>`
           );
         });
     </script>
