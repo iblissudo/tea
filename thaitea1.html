@@ -217,6 +217,16 @@
       class="menu-item"
       id="openChocolate"
     />
+
+    <br />
+    <br />
+    <img
+      src="coffe.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openCoffe"
+    />
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -427,6 +437,12 @@
             "Chocolate",
             `<option value="Chocolate">Chocolate</option>`
           );
+        });
+
+      document
+        .getElementById("openCoffe")
+        .addEventListener("click", function () {
+          openOrderForm("Coffe", `<option value="Coffe">Coffe</option>`);
         });
     </script>
   </body>
