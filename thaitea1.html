@@ -401,6 +401,16 @@
       id="openBobaBrownSugar"
     />
 
+    <br />
+    <br />
+    <img
+      src="coffebrownsugar.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openCoffeeBrownSugar"
+    />
+
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -759,7 +769,16 @@
         .addEventListener("click", function () {
           openOrderForm(
             "BobaBrownSugar",
-            `<option value="BobaBrownSugart">BobaBrownSugar</option>`
+            `<option value="BobaBrownSugar">BobaBrownSugar</option>`
+          );
+        });
+
+        document
+        .getElementById("openCoffeeBrownSugar")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "CoffeeBrownSugar",
+            `<option value="CoffeeBrownSugar">CoffeeBrownSugar</option>`
           );
         });
 
