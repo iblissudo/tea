@@ -351,6 +351,15 @@
       id="openLycheeFreshMilkYakult"
     />
 
+    <br />
+    <br />
+    <img
+      src="strawberryyakult.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openStrawberryYakult"
+    />
 
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
@@ -655,7 +664,7 @@
         .getElementById("openLycheeYakult")
         .addEventListener("click", function () {
           openOrderForm(
-            "OrangeFreshMilkYakult",
+            "LycheeYakult",
             `<option value="LycheeYakult">LycheeYakult</option>`
           );
         });
@@ -664,8 +673,17 @@
         .getElementById("openLycheeFreshMilkYakult")
         .addEventListener("click", function () {
           openOrderForm(
-            "OrangeFreshMilkYakult",
+            "LycheeFreshMilkYakult",
             `<option value="LycheeFreshMIlkYakult">LycheeFreshMilkYakult</option>`
+          );
+        });
+
+        document
+        .getElementById("openStrawberryYakult")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "StrawberryYakult",
+            `<option value="StrawberryYakult">LycheeFreshMilkYakult</option>`
           );
         });
     </script>
