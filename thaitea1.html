@@ -227,6 +227,16 @@
       class="menu-item"
       id="openCoffe"
     />
+
+    <br />
+    <br />
+    <img
+      src="tiramitsu.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openTiramitsu"
+    />
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -443,6 +453,15 @@
         .getElementById("openCoffe")
         .addEventListener("click", function () {
           openOrderForm("Coffe", `<option value="Coffe">Coffe</option>`);
+        });
+
+      document
+        .getElementById("openTiramitsu")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "Tiramitsu",
+            `<option value="Tiramitsu">Tiramitsu</option>`
+          );
         });
     </script>
   </body>
