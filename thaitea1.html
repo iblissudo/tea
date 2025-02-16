@@ -257,6 +257,16 @@
       class="menu-item"
       id="openBublegum"
     />
+
+    <br />
+    <br />
+    <img
+      src="redvelvet.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openRedvelvet"
+    />
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -496,6 +506,15 @@
           openOrderForm(
             "Bublegum",
             `<option value="Bublegum">Bublegum</option>`
+          );
+        });
+
+      document
+        .getElementById("openRedvelvet")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "Redvelvet",
+            `<option value="Redvelvet">Redvelvet</option>`
           );
         });
     </script>
