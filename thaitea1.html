@@ -237,6 +237,16 @@
       class="menu-item"
       id="openTiramitsu"
     />
+
+    <br />
+    <br />
+    <img
+      src="taro.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openTaro"
+    />
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -462,6 +472,12 @@
             "Tiramitsu",
             `<option value="Tiramitsu">Tiramitsu</option>`
           );
+        });
+
+      document
+        .getElementById("openTaro")
+        .addEventListener("click", function () {
+          openOrderForm("Taro", `<option value="Taro">Taro</option>`);
         });
     </script>
   </body>
