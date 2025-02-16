@@ -288,6 +288,16 @@
       id="openVanilla"
     />
 
+    <br />
+    <br />
+    <img
+      src="manggoyakult.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openManggoYakult"
+    />
+
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -549,6 +559,15 @@
         .getElementById("openVanilla")
         .addEventListener("click", function () {
           openOrderForm("Vanilla", `<option value="Vanilla">Vanilla</option>`);
+        });
+
+      document
+        .getElementById("openManggoYakult")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "ManggoYakult",
+            `<option value="ManggoYakult">ManggoYakult</option>`
+          );
         });
     </script>
   </body>
