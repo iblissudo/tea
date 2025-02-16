@@ -308,6 +308,16 @@
       id="openManggoFreshmMlkYakult"
     />
 
+    <br />
+    <br />
+    <img
+      src="orangeyakult.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openOrangeYakult"
+    />
+
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -586,6 +596,15 @@
           openOrderForm(
             "ManggoFreshMilkYakult",
             `<option value="ManggoFreshMilkYakult">ManggoFreshMilkYakult</option>`
+          );
+        });
+
+      document
+        .getElementById("openOrangeYakult")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "OrangeYakult",
+            `<option value="OrangeYakult">OrangeYakult</option>`
           );
         });
     </script>
