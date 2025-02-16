@@ -207,6 +207,16 @@
       class="menu-item"
       id="openMilo"
     />
+
+    <br />
+    <br />
+    <img
+      src="chocolate.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openChocolate"
+    />
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -408,6 +418,15 @@
         .getElementById("openMilo")
         .addEventListener("click", function () {
           openOrderForm("Milo", `<option value="Milo">Milo</option>`);
+        });
+
+      document
+        .getElementById("openChocolate")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "Chocolate",
+            `<option value="Chocolate">Chocolate</option>`
+          );
         });
     </script>
   </body>
