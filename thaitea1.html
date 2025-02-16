@@ -278,6 +278,16 @@
       id="openOreo"
     />
 
+    <br />
+    <br />
+    <img
+      src="vanilla.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openVanilla"
+    />
+
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -533,6 +543,12 @@
         .getElementById("openOreo")
         .addEventListener("click", function () {
           openOrderForm("Oreo", `<option value="Oreo">Oreo</option>`);
+        });
+
+      document
+        .getElementById("openVanilla")
+        .addEventListener("click", function () {
+          openOrderForm("Vanilla", `<option value="Vanilla">Vanilla</option>`);
         });
     </script>
   </body>
