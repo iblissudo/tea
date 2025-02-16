@@ -381,6 +381,15 @@
       id="openAnggurYakult"
     />
 
+    <br />
+    <br />
+    <img
+      src="anggurfreshmilkyakult.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openAnggurFreshMilkYakult"
+    />
 
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
@@ -723,6 +732,15 @@
           openOrderForm(
             "AnggurYakult",
             `<option value="AnggurYakult">AnggurYakult</option>`
+          );
+        });
+
+        document
+        .getElementById("openAnggurFreshMilkYakult")
+        .addEventListener("click", function () {
+          openOrderForm(
+            "AnggurFreshMilkYakult",
+            `<option value="AnggurFreshMilkYakult">AnggurFreshMilkYakult</option>`
           );
         });
     </script>
