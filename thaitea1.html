@@ -267,6 +267,17 @@
       class="menu-item"
       id="openRedvelvet"
     />
+
+    <br />
+    <br />
+    <img
+      src="oreo.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openOreo"
+    />
+
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -516,6 +527,12 @@
             "Redvelvet",
             `<option value="Redvelvet">Redvelvet</option>`
           );
+        });
+
+      document
+        .getElementById("openOreo")
+        .addEventListener("click", function () {
+          openOrderForm("Oreo", `<option value="Oreo">Oreo</option>`);
         });
     </script>
   </body>
