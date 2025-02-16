@@ -197,6 +197,16 @@
       class="menu-item"
       id="openLumutCappucino"
     />
+
+    <br />
+    <br />
+    <img
+      src="milo.png"
+      width="200"
+      height="200"
+      class="menu-item"
+      id="openMilo"
+    />
     <div class="footer">
       <a href="https://wa.me/6281224114500" target="_blank">
         <img src="whatsapp.png" width="70" height="70" alt="WhatsApp" />
@@ -389,9 +399,15 @@
         .getElementById("openLumutCappucino")
         .addEventListener("click", function () {
           openOrderForm(
-            "Lychee Squash",
-            `<option value="LumutCappucino">LumutCappucino</option>`
+            "Lumut Cappucino",
+            `<option value="Lumut Cappucino">Lumut Cappucino</option>`
           );
+        });
+
+      document
+        .getElementById("openMilo")
+        .addEventListener("click", function () {
+          openOrderForm("Milo", `<option value="Milo">Milo</option>`);
         });
     </script>
   </body>
